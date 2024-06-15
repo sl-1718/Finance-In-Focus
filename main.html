@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #engagement-chart {
+            max-width: 400px;
+            margin: auto;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <h1>DASHBOARD</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#profile">Profile</a></li>
+                <li><a href="#graph">Graph</a></li>
+                <li><a href="#scores">Scores</a></li>
+                <li><a href="#leaderboard">Leaderboard</a></li>
+                <li><a href="D:\Landing Page\index.html">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="profile">
+            <div class="profile">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="Profile Picture">
+                <h2>Lalith Surya</h2>
+                <p>@laliths124</p>
+                <button>Edit Profile</button>
+            </div>
+        </section>
+
+        <section id="graph">
+            <h3>User Engagement</h3>
+            <canvas id="engagement-chart"></canvas>
+        </section>
+
+        <section id="scores">
+            <h3>Scores</h3>
+            <ul class="quiz-scores">
+                <!-- Quiz scores will be dynamically generated -->
+            </ul>
+        </section>
+
+        <section id="leaderboard">
+            <h3>Leaderboard</h3>
+            <ul class="leaderboard">
+                <!-- Leaderboard entries will be dynamically generated -->
+            </ul>
+            <button id="toggleLeaderboard">Toggle Details</button>
+        </section>
+        
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Website Name. All rights reserved.</p>
+        <ul class="social-links">
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+        </ul>
+    </footer>
+
+    <script>
+        // Placeholder data for user engagement over time
+        const engagementData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'User Engagement',
+                data: [150, 200, 300, 400, 250, 350],
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Draw user engagement graph
+        const engagementChartCanvas = document.getElementById('engagement-chart').getContext('2d');
+        const engagementChart = new Chart(engagementChartCanvas, {
+            type: 'line',
+            data: engagementData,
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+
+        // Random names for leaderboard
+        const leaderboardNames = ['Varikuppala Bhavani', 'Siri Rao', 'Sriya Lanka', 'Mohit Patel', 'Shreya Iyer'];
+        const leaderboardScores = [95, 88, 82, 78, 75]; // Random scores
+
+        const leaderboardList = document.querySelector('.leaderboard');
+const toggleButton = document.getElementById('toggleLeaderboard');
+
+// Function to toggle detailed view of leaderboard entries
+function toggleLeaderboardDetails() {
+    leaderboardList.classList.toggle('show-details');
+    if (leaderboardList.classList.contains('show-details')) {
+        toggleButton.textContent = 'Hide Details';
+    } else {
+        toggleButton.textContent = 'Toggle Details';
+    }
+}
+
+// Event listener for toggle button
+toggleButton.addEventListener('click', toggleLeaderboardDetails);
+
+// Updated leaderboard generation
+leaderboardNames.forEach((name, index) => {
+    const listItem = document.createElement('li');
+    listItem.innerHTML = `
+        <div class="leaderboard-entry">
+            <div class="profile-info">
+                <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="${name} Profile Picture">
+                <div>
+                    <h4>${name}</h4>
+                    <p>Score: ${leaderboardScores[index]}%</p>
+                </div>
+            </div>
+            <div class="details">
+                <p>Rank: ${index + 1}</p>
+                <!-- Add more details as needed -->
+            </div>
+        </div>
+    `;
+    leaderboardList.appendChild(listItem);
+});
+
+        // Random quiz scores
+        const quizTitles = ['Debt Management', 'Savings', 'Loans', 'Risk Management', 'Stocks'];
+        const quizScores = [];
+
+        function getRandomDate() {
+            const day = Math.floor(Math.random() * 28) + 1; // Random day between 1 and 28
+            const month = Math.floor(Math.random() * 12) + 1; // Random month between 1 and 12
+            const year = Math.floor(Math.random() * 5) + 2020; // Random year between 2020 and 2024
+            return `${day}/${month}/${year}`;
+        }
+
+        quizTitles.forEach(title => {
+            const score = Math.floor(Math.random() * 100); // Random score between 0 and 100
+            const date = getRandomDate();
+            quizScores.push({ title, date, score });
+        });
+
+        const quizScoresList = document.querySelector('.quiz-scores');
+        quizScores.forEach(score => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <h4>${score.title}</h4>
+                <p>Date: ${score.date}</p>
+                <p>Score: ${score.score}%</p>
+            `;
+            quizScoresList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

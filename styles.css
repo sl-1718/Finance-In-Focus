@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teen Finance Hub</title>
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa; /* Light gray background */
+            color: #333;
+        }
+        header {
+            background-color: #007bff; /* Blue header */
+            color: #fff;
+            padding: 20px 0;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        nav {
+            background-color: #0056b3; /* Darker blue nav background */
+            padding: 10px 0;
+            text-align: center;
+        }
+        nav button {
+            background-color: #ff6b6b; /* Red button */
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            margin: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            outline: none;
+            transition: background-color 0.3s ease;
+        }
+        nav button:hover {
+            background-color: #e63946; /* Darker red on hover */
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #007bff; /* Blue headings */
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #444;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        Teen Finance Hub
+    </header>
+    <nav>
+        <button onclick="showContent('budgeting')">Budgeting</button>
+        <button onclick="showContent('saving')">Saving</button>
+        <button onclick="showContent('investing')">Investing</button>
+    </nav>
+    <div class="container">
+        <section id="budgeting" style="display: none;">
+            <h2>Budgeting</h2>
+            <p>Learn how to manage your money wisely with budgeting tips!</p>
+        </section>
+        <section id="saving" style="display: none;">
+            <h2>Saving</h2>
+            <p>Discover cool ways to save money for your next big purchase or adventure!</p>
+        </section>
+        <section id="investing" style="display: none;">
+            <h2>Investing</h2>
+            <p>Get started with investing and watch your money grow while you're still young!</p>
+        </section>
+    </div>
+
+    <script>
+        function showContent(id) {
+            // Hide all sections
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.style.display = 'none';
+            });
+            // Show the selected section
+            var selectedSection = document.getElementById(id);
+            selectedSection.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
